@@ -40,6 +40,20 @@ if (isset($_GET['hapus'])) {
 
 
 /* =========================
+   SEARCH USER
+========================= */
+
+$cari = isset($_GET['cari'])
+    ? trim($_GET['cari'])
+    : '';
+
+$cari_sql = mysqli_real_escape_string(
+    $koneksi,
+    $cari
+);
+
+
+/* =========================
    AMBIL DATA USER
 ========================= */
 
@@ -51,6 +65,11 @@ $query = mysqli_query(
         username,
         role
      FROM users
+     WHERE
+        CAST(id_user AS CHAR) LIKE '%$cari_sql%'
+        OR nama LIKE '%$cari_sql%'
+        OR username LIKE '%$cari_sql%'
+        OR role LIKE '%$cari_sql%'
      ORDER BY id_user DESC"
 );
 
@@ -247,6 +266,44 @@ $query = mysqli_query(
             </div>
 
         <?php endif; ?>
+
+        <!-- =========================
+             SEARCH USER
+        ========================= -->
+
+        <form method="GET" class="customer-search">
+
+            <div class="customer-search-box">
+
+                <input
+                    type="text"
+                    name="cari"
+                    placeholder="Cari ID user, nama, username, atau role..."
+                    value="<?= htmlspecialchars($cari); ?>"
+                >
+
+                <button
+                    type="submit"
+                    class="customer-search-button"
+                >
+                    Cari
+                </button>
+
+                <?php if ($cari != ''): ?>
+
+                    <a
+                        href="user.php"
+                        class="customer-reset-button"
+                    >
+                        Reset
+                    </a>
+
+                <?php endif; ?>
+
+            </div>
+
+        </form>
+        <br><br>
 
 
         <!-- =========================

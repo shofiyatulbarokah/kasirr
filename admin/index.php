@@ -268,7 +268,13 @@ $query = mysqli_query($koneksi, "
                             </td>
 
                             <td>
-                                <?= htmlspecialchars($data['nama_pelanggan'] ?? '-'); ?>
+                                <strong>
+
+                                <?= !empty($data['nama_pelanggan'])
+                                    ? htmlspecialchars($data['nama_pelanggan'])
+                                    : 'Pelanggan Umum'; ?>
+
+                            </strong>
                             </td>
 
                             <td>

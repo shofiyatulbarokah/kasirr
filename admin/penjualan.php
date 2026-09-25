@@ -39,6 +39,12 @@ if (isset($_GET['hapus'])) {
    DATA PENJUALAN
 ========================= */
 
+$cari = isset($_GET['cari'])
+    ? trim($_GET['cari'])
+    : '';
+
+$cari_sql = mysqli_real_escape_string($koneksi, $cari);
+
 $query = mysqli_query(
     $koneksi,
     "SELECT
@@ -50,9 +56,12 @@ $query = mysqli_query(
      FROM penjualan p
      LEFT JOIN pelanggan pl
         ON p.id_pelanggan = pl.id_pelanggan
+     WHERE
+        CAST(p.id_penjualan AS CHAR) LIKE '%$cari_sql%'
+        OR pl.nama_pelanggan LIKE '%$cari_sql%'
+        OR DATE_FORMAT(p.tanggal_penjualan, '%d-%m-%Y') LIKE '%$cari_sql%'
      ORDER BY p.id_penjualan DESC"
 );
-
 ?>
 
 <!DOCTYPE html>
@@ -238,6 +247,44 @@ $query = mysqli_query(
 
 
         </div>
+
+        <!-- =========================
+             SEARCH PENJUALAN
+        ========================= -->
+
+        <form method="GET" class="customer-search">
+
+            <div class="customer-search-box">
+
+                <input
+                    type="text"
+                    name="cari"
+                    placeholder="Cari ID penjualan, pelanggan, atau tanggal..."
+                    value="<?= htmlspecialchars($cari); ?>"
+                >
+
+                <button
+                    type="submit"
+                    class="customer-search-button"
+                >
+                    Cari
+                </button>
+
+                <?php if ($cari != ''): ?>
+
+                    <a
+                        href="penjualan.php"
+                        class="customer-reset-button"
+                    >
+                        Reset
+                    </a>
+
+                <?php endif; ?>
+
+            </div>
+
+        </form>
+        <br><br>
 
 
 

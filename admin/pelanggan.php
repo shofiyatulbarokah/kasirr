@@ -36,6 +36,12 @@ if (isset($_GET['hapus'])) {
    AMBIL DATA PELANGGAN
 ========================= */
 
+$cari = isset($_GET['cari'])
+    ? trim($_GET['cari'])
+    : '';
+
+$cari_sql = mysqli_real_escape_string($koneksi, $cari);
+
 $query = mysqli_query(
     $koneksi,
     "SELECT
@@ -44,6 +50,9 @@ $query = mysqli_query(
         alamat,
         no_hp
      FROM pelanggan
+     WHERE nama_pelanggan LIKE '%$cari_sql%'
+        OR alamat LIKE '%$cari_sql%'
+        OR no_hp LIKE '%$cari_sql%'
      ORDER BY id_pelanggan DESC"
 );
 ?>
@@ -87,105 +96,105 @@ $query = mysqli_query(
         Menu Utama
     </div>
 
-    <nav class="menu">
+        <nav class="menu">
 
-        <a href="index.php">
-            <span class="menu-icon">⌂</span>
-            <span>Beranda</span>
-        </a>
+            <a href="index.php">
+                <span class="menu-icon">⌂</span>
+                <span>Beranda</span>
+            </a>
 
-        <a href="produk.php">
-            <span class="menu-icon">▣</span>
-            <span>Produk</span>
-        </a>
+            <a href="produk.php">
+                <span class="menu-icon">▣</span>
+                <span>Produk</span>
+            </a>
 
-        <a href="pelanggan.php" class="active">
-            <span class="menu-icon">♙</span>
-            <span>Pelanggan</span>
-        </a>
+            <a href="pelanggan.php" class="active">
+                <span class="menu-icon">♙</span>
+                <span>Pelanggan</span>
+            </a>
 
-        <a href="penjualan.php">
-            <span class="menu-icon">▤</span>
-            <span>Penjualan</span>
-        </a>
+            <a href="penjualan.php">
+                <span class="menu-icon">▤</span>
+                <span>Penjualan</span>
+            </a>
 
-        <a href="laporan.php">
-            <span class="menu-icon">◷</span>
-            <span>Laporan</span>
-        </a>
+            <a href="laporan.php">
+                <span class="menu-icon">◷</span>
+                <span>Laporan</span>
+            </a>
 
-        <a href="user.php">
-            <span class="menu-icon">♙</span>
-            <span>Users</span>
-        </a>
-        
-    </nav>
+            <a href="user.php">
+                <span class="menu-icon">♙</span>
+                <span>Users</span>
+            </a>
+            
+        </nav>
 
-</aside>
-
-
-<!-- MAIN -->
-
-<div class="main">
-
-    <!-- TOPBAR -->
-
-<header class="topbar">
-
-        <div class="topbar-left">
-
-            <h3>Pelanggan</h3>
-
-            <span>Sistem Pengelolaan Kasir</span>
-
-        </div>
+    </aside>
 
 
-        <div class="topbar-right">
+    <!-- MAIN -->
 
+    <div class="main">
 
-            <!-- PROFIL USER -->
+        <!-- TOPBAR -->
 
-            <div class="admin-profile">
+    <header class="topbar">
 
-                <div class="admin-avatar">
+            <div class="topbar-left">
 
-                    <?= strtoupper(
-                        substr($_SESSION['nama'], 0, 1)
-                    ); ?>
+                <h3>Pelanggan</h3>
 
-                </div>
-
-
-                <div class="admin-info">
-
-                    <strong>
-                        <?= htmlspecialchars($_SESSION['nama']); ?>
-                    </strong>
-
-                    <small>
-                        @<?= htmlspecialchars($_SESSION['username']); ?>
-                    </small>
-
-                </div>
+                <span>Sistem Pengelolaan Kasir</span>
 
             </div>
 
 
-            <!-- LOGOUT -->
-
-            <a
-                href="../logout.php"
-                class="btn-logout"
-                onclick="return confirm('Yakin ingin logout?')"
-            >
-                Logout
-            </a>
+            <div class="topbar-right">
 
 
-        </div>
+                <!-- PROFIL USER -->
 
-    </header>
+                <div class="admin-profile">
+
+                    <div class="admin-avatar">
+
+                        <?= strtoupper(
+                            substr($_SESSION['nama'], 0, 1)
+                        ); ?>
+
+                    </div>
+
+
+                    <div class="admin-info">
+
+                        <strong>
+                            <?= htmlspecialchars($_SESSION['nama']); ?>
+                        </strong>
+
+                        <small>
+                            @<?= htmlspecialchars($_SESSION['username']); ?>
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGOUT -->
+
+                <a
+                    href="../logout.php"
+                    class="btn-logout"
+                    onclick="return confirm('Yakin ingin logout?')"
+                >
+                    Logout
+                </a>
+
+
+            </div>
+
+        </header>
 
 
     <section class="content">
@@ -214,6 +223,38 @@ $query = mysqli_query(
         </a>
 
     </div>
+
+    <!-- =========================
+     SEARCH PELANGGAN
+    ========================= -->
+
+    <form method="GET" class="customer-search">
+
+        <div class="customer-search-box">
+
+            <input
+                type="text"
+                name="cari"
+                placeholder="Cari nama, alamat, atau nomor HP..."
+                value="<?= htmlspecialchars($cari); ?>"
+            >
+
+            <button type="submit" class="customer-search-button">
+                Cari
+            </button>
+
+            <?php if ($cari != ''): ?>
+
+                <a href="pelanggan.php" class="customer-reset-button">
+                    Reset
+                </a>
+
+            <?php endif; ?>
+
+        </div>
+
+    </form>
+    <br><br>
 
 
 

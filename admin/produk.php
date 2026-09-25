@@ -31,12 +31,31 @@ if (isset($_GET['hapus'])) {
    AMBIL DATA PRODUK
 ========================= */
 
-$query = mysqli_query(
-    $koneksi,
-    "SELECT id_produk, nama_produk, harga, stok
-     FROM produk
-     ORDER BY id_produk DESC"
-);
+$cari = isset($_GET['cari']) ? trim($_GET['cari']) : '';
+
+$cari_aman = mysqli_real_escape_string($koneksi, $cari);
+
+if ($cari != '') {
+
+    $query = mysqli_query(
+        $koneksi,
+        "SELECT id_produk, nama_produk, harga, stok
+         FROM produk
+         WHERE id_produk LIKE '%$cari_aman%'
+         OR nama_produk LIKE '%$cari_aman%'
+         ORDER BY id_produk DESC"
+    );
+
+} else {
+
+    $query = mysqli_query(
+        $koneksi,
+        "SELECT id_produk, nama_produk, harga, stok
+         FROM produk
+         ORDER BY id_produk DESC"
+    );
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -213,6 +232,34 @@ $query = mysqli_query(
 
         </div>
 
+
+        <!-- PENCARIAN PRODUK -->
+
+        <form method="GET" class="search-area">
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    name="cari"
+                    placeholder="Cari nama produk..."
+                    value="<?= isset($_GET['cari']) ? htmlspecialchars($_GET['cari']) : '' ?>"
+                >
+
+                <button type="submit" class="search-button">
+                    Cari
+                </button>
+
+                <?php if (isset($_GET['cari']) && $_GET['cari'] != ''): ?>
+                    <a href="produk.php" class="search-button">
+                        Reset
+                    </a>
+                <?php endif; ?>
+
+            </div>
+
+        </form>
+        <br><br>
 
 
         <!-- =========================

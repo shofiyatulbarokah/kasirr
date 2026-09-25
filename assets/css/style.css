@@ -1855,3 +1855,297 @@ td:last-child {
     }
 
 }
+
+/* ==================================================
+   SEARCH AREA
+================================================== */
+
+.search-area {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+
+/* SEARCH BOX */
+
+.search-box {
+    width: 500px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe5e7;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 8px rgba(38, 50, 56, 0.03);
+
+    transition: 0.2s;
+}
+
+.search-box:focus-within {
+    border-color: #176b87;
+    box-shadow: 0 0 0 3px rgba(23, 107, 135, 0.07);
+}
+
+
+/* ICON */
+
+.search-icon {
+    width: 45px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8a969b;
+    font-size: 15px;
+}
+
+
+/* INPUT */
+
+.search-box input {
+    flex: 1;
+
+    min-width: 0;
+    height: 100%;
+
+    padding: 0 8px 0 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #263238;
+
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.search-box input::placeholder {
+    color: #aab3b7;
+}
+
+
+/* CARI */
+
+.search-button {
+    height: 34px;
+
+    margin-right: 5px;
+    padding: 0 16px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #176b87;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.search-button:hover {
+    background: #125a71;
+}
+
+
+/* RESET */
+
+.search-reset {
+    height: 34px;
+
+    margin-right: 5px;
+    padding: 0 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d9e0e3;
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #718087;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.search-reset:hover {
+    background: #f5f7f9;
+    border-color: #c8d1d5;
+    color: #45545a;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .search-box {
+        width: 100%;
+    }
+
+}
+
+/* ==================================================
+   SEARCH PELANGGAN
+================================================== */
+
+.customer-search {
+    margin-bottom: 22px;
+}
+
+.customer-search-box {
+    width: 560px;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe5e7;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 8px rgba(38, 50, 56, 0.03);
+
+    transition: 0.2s;
+}
+
+.customer-search-box:focus-within {
+    border-color: #176b87;
+    box-shadow: 0 0 0 3px rgba(23, 107, 135, 0.07);
+}
+
+
+/* ICON */
+
+.customer-search-icon {
+    width: 45px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8a969b;
+    font-size: 21px;
+}
+
+
+/* INPUT */
+
+.customer-search-box input {
+    flex: 1;
+
+    min-width: 0;
+    height: 100%;
+
+    padding: 0 10px 0 0;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: #263238;
+
+    font-family: inherit;
+    font-size: 13px;
+}
+
+.customer-search-box input::placeholder {
+    color: #aab3b7;
+}
+
+
+/* BUTTON CARI */
+
+.customer-search-button {
+    height: 34px;
+
+    margin-right: 5px;
+    padding: 0 17px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #176b87;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.customer-search-button:hover {
+    background: #125a71;
+}
+
+
+/* BUTTON RESET */
+
+.customer-reset-button {
+    height: 34px;
+
+    margin-right: 5px;
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #d9e0e3;
+    border-radius: 6px;
+
+    background: #ffffff;
+    color: #718087;
+
+    text-decoration: none;
+
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.customer-reset-button:hover {
+    background: #f5f7f9;
+    border-color: #c8d1d5;
+    color: #45545a;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+
+    .customer-search-box {
+        width: 100%;
+    }
+
+}
